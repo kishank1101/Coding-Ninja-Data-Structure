@@ -1,0 +1,97 @@
+// Merge Sort Code
+// Send Feedback
+// Sort an array A using Merge Sort.
+// Change in the input array itself. So no need to return or print anything.
+// Input format :
+// Line 1 : Integer n i.e. Array size
+// Line 2 : Array elements (separated by space)
+// Output format :
+// Array elements in increasing order (separated by space)
+// Constraints :
+// 1 <= n <= 1000
+// Sample Input:
+// 6 
+// 2 6 8 5 4 3
+// Sample Output:
+// 2 3 4 5 6 8
+
+#include <bits/stdc++.h>
+
+using namespace std;
+#define ll long long
+#define pb push_back
+map <ll,ll> hm;
+ll mod = 1e9+7;
+
+void merge(int* arr, int l,int m,int r)
+{
+    int arr1[m-l+1];
+    int arr2[r-m];
+    for(int i = l;i<=m;i++)
+    {
+        arr1[i-l]=arr[i];
+    }
+    for(int i = m+1;i<=r;i++)
+    {
+        arr2[i-m-1]=arr[i];
+    }
+    int i = 0;
+    int j = 0;
+    int k = l;
+    
+    while(i<m-l+1 && j<r-m)
+    {
+        if(arr1[i]<=arr2[j])
+        {
+            arr[k]=arr1[i];
+            i++;
+        }
+        else
+        {
+            arr[k]=arr2[j];
+            j++;
+        }
+        k++;
+    }
+    
+    while(i<m-l+1)
+    {
+        arr[k]=arr1[i];
+        i++;
+        k++;
+    }
+    while(j<r-m)
+    {
+        arr[k]=arr2[j];
+        j++;
+        k++;
+    }
+}
+
+void mergesort(int* arr, int l,int r)
+{
+    if(l<r)
+    {
+        int mid = (l+r)/2;
+        mergesort(arr,l,mid);
+        mergesort(arr,mid+1,r);
+        merge(arr,l,mid,r);
+    }
+}
+
+int main() {
+ios_base::sync_with_stdio(false);
+cin.tie(NULL);
+    int n;
+    cin>>n;
+    int arr[n];
+    for(int i = 0;i<n;i++)
+    {
+        cin>>arr[i];
+    }
+    mergesort(arr,0,n-1);
+    for(int i = 0;i<n;i++)
+    {
+        cout<<arr[i]<<" ";
+    }
+}
