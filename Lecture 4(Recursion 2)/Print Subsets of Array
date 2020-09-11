@@ -1,0 +1,66 @@
+// Print Subsets of Array
+// Send Feedback
+// Given an integer array (of length n), find and print all the subsets of input array.
+// Subsets are of length varying from 0 to n, that contain elements of the array. But the order of elements should remain same as in the input array.
+// Note : The order of subsets are not important. Just print the subsets in different lines.
+// Input format :
+// Line 1 : Integer n, Size of array
+// Line 2 : Array elements (separated by space)
+// Constraints :
+// 1 <= n <= 15
+// Sample Input:
+// 3
+// 15 20 12
+// Sample Output:
+// [] (this just represents an empty array, don't worry about the square brackets)
+// 12 
+// 20 
+// 20 12 
+// 15 
+// 15 12 
+// 15 20 
+// 15 20 12 
+
+#include <bits/stdc++.h>
+
+using namespace std;
+#define ll long long
+#define pb push_back
+map <int,int> hm;
+ll mod = 1e9+7;
+
+void subset(int* arr,int n,int i,vector<int> res)
+{
+    if(i==n)
+    {
+        for(int j = 0;j<res.size();j++)
+        {
+            cout<<res[j]<<" ";
+        }
+        cout<<endl;
+        return;
+    }
+    else
+    {
+        subset(arr,n,i+1,res);
+        res.pb(arr[i]);
+        subset(arr,n,i+1,res);
+    }
+    
+}
+
+int main() {
+ios_base::sync_with_stdio(false);
+cin.tie(NULL);
+    int n;
+    cin>>n;
+    int arr[n];
+    for(int i = 0;i<n;i++)
+    {
+        int x;
+        cin>>arr[i];
+    }
+    vector<int> res;
+    subset(arr,n,0,res);
+    
+}
