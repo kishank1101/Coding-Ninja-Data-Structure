@@ -1,0 +1,49 @@
+// Remove Duplicates Recursively
+// Send Feedback
+// Given a string S, remove consecutive duplicates from it recursively.
+// Input Format :
+// String S
+// Output Format :
+// Output string
+// Constraints :
+// 1 <= Length of String S <= 10^3
+// Sample Input :
+// aabccba
+// Sample Output :
+// abcba
+
+#include <bits/stdc++.h>
+
+using namespace std;
+#define ll long long
+#define pb push_back
+map <char,int> hm;
+ll mod = 1e9+7;
+
+void solve(string& str,int count,int i)
+{
+    if(i==str.length())
+    {
+        str.erase(str.end()-count,str.end());
+        return;
+    }
+    else
+    {
+        hm[str[i]]++;
+        if(hm[str[i]]>1)
+        {
+            count++;
+        }
+        else str[i-count]=str[i];
+        solve(str,count,i+1);
+    }
+}
+
+int main() {
+ios_base::sync_with_stdio(false);
+cin.tie(NULL);
+    string str;
+    cin>>str;
+    solve(str,0,0);
+    cout<<str<<endl;
+}
