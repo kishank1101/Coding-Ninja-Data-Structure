@@ -1,0 +1,72 @@
+// Return Keypad Code
+// Send Feedback
+// Given an integer n, using phone keypad find out all
+// the possible strings that can be made using digits of input n.
+// Return empty string for numbers 0 and 1.
+// Note : The order of strings are not important.
+// Input Format :
+// Integer n
+// Output Format :
+// All possible strings in different lines
+// Constraints :
+// 1 <= n <= 10^6
+// Sample Input:
+// 23
+// Sample Output:
+// ad
+// ae
+// af
+// bd
+// be
+// bf
+// cd
+// ce
+// cf
+
+#include <bits/stdc++.h>
+
+using namespace std;
+#define ll long long
+#define pb push_back
+map <int,vector<char>> hm;
+ll mod = 1e9+7;
+
+void solve(int n,string str,vector<string>& res)
+{
+    if(n==0)
+    {
+        res.pb(str);
+        return;
+    }
+    int x = n%10;
+    for(int i = 0;i<hm[x].size();i++)
+    {
+        str+=hm[x][i];
+        solve(n/10,str,res);
+        str.pop_back();
+    }
+}
+
+int main() {
+ios_base::sync_with_stdio(false);
+cin.tie(NULL);
+    int n;
+    cin>>n;
+    hm[2]={'a','b','c'};
+    hm[3]={'d','e','f'};
+    hm[4]={'g','h','i'};
+    hm[5]={'j','k','l'};
+    hm[6]={'m','n','o'};
+    hm[7]={'p','q','r','s'};
+    hm[8]={'t','u','v'};
+    hm[9]={'w','x','y','z'};
+    string str = to_string(n);
+    reverse(str.begin(),str.end());
+    string str1;
+    vector<string> res;
+    solve(stoi(str),str1,res);
+    for(int i = 0;i<res.size();i++)
+    {
+        cout<<res[i]<<endl;
+    }
+}
