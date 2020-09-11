@@ -1,0 +1,37 @@
+// Multiplication (Recursive)
+// Send Feedback
+// Given two integers m & n, calculate and return their multiplication
+// using recursion. You can only use subtraction and addition for your calculation.
+//     No other operators are allowed.
+// Input format : m and n (in different lines)
+
+// Sample Input :
+// 3 
+// 5
+// Sample Output -
+// 15
+
+#include <bits/stdc++.h>
+
+using namespace std;
+#define ll long long
+#define pb push_back
+map <ll,ll> hm;
+ll mod = 1e9+7;
+
+int solve(int m,int n)
+{
+    if(n==0)
+    {
+        return 0;
+    }
+    return m+solve(m,n-1);
+}
+
+int main() {
+ios_base::sync_with_stdio(false);
+cin.tie(NULL);
+    int m,n;
+    cin>>m>>n;
+    cout<<solve(max(m,n),min(m,n));
+}
