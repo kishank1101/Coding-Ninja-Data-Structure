@@ -1,0 +1,66 @@
+// Print Subset Sum to K
+// Send Feedback
+// Given an array A and an integer K, print all subsets of A which sum to K.
+// Subsets are of length varying from 0 to n, that contain elements of the array. But the order of elements should remain same as in the input array.
+// Note : The order of subsets are not important. Just print them in different lines.
+// Input format :
+// Line 1 : Size of input array
+// Line 2 : Array elements separated by space
+// Line 3 : K 
+// Sample Input:
+// 9 
+// 5 12 3 17 1 18 15 3 17 
+// 6
+// Sample Output:
+// 3 3
+// 5 1
+
+#include <bits/stdc++.h>
+
+using namespace std;
+#define ll long long
+#define pb push_back
+map <int,int> hm;
+ll mod = 1e9+7;
+
+void subset(int* arr,int n,int i,vector<int> res,int sum,int k)
+{
+    if(sum==k)
+    {
+        for(int j = 0;j<res.size();j++)
+        {
+            cout<<res[j]<<" ";
+        }
+        cout<<endl;
+        return;
+    }
+    else if(i==n || sum>k)
+    {
+        return;
+    }
+    else
+    {
+        subset(arr,n,i+1,res,sum,k);
+        res.pb(arr[i]);
+        subset(arr,n,i+1,res,sum+arr[i],k);
+    }
+    
+}
+
+int main() {
+ios_base::sync_with_stdio(false);
+cin.tie(NULL);
+    int n;
+    cin>>n;
+    int arr[n];
+    for(int i = 0;i<n;i++)
+    {
+        int x;
+        cin>>arr[i];
+    }
+    int k;
+    cin>>k;
+    vector<int> res;
+    subset(arr,n,0,res,0,k);
+    
+}
