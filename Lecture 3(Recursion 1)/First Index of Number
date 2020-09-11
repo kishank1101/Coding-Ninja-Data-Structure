@@ -1,0 +1,57 @@
+// First Index of Number
+// Send Feedback
+// Given an array of length N and an integer x, you need
+// to find and return the first index of integer x present 
+// in the array. Return -1 if it is not present in the array.
+// First index means, the index of first occurrence of x in the input array.
+// Do this recursively. Indexing in the array starts from 0.
+// Input Format :
+// Line 1 : An Integer N i.e. size of array
+// Line 2 : N integers which are elements of the array, separated by spaces
+// Line 3 : Integer x
+// Output Format :
+// first index or -1
+// Constraints :
+// 1 <= N <= 10^3
+// Sample Input :
+// 4
+// 9 8 10 8
+// 8
+// Sample Output :
+// 1
+
+#include <bits/stdc++.h>
+
+using namespace std;
+#define ll long long
+#define pb push_back
+map <ll,ll> hm;
+ll mod = 1e9+7;
+
+int solve(int* arr,int n,int cur,int key)
+{
+    if(cur==n)
+    {
+        return -1;
+    }
+    if(arr[cur]==key)
+    {
+        return cur;
+    }
+    else return solve(arr,n,cur+1,key);
+}
+
+int main() {
+ios_base::sync_with_stdio(false);
+cin.tie(NULL);
+    int n;
+    cin>>n;
+    int arr[n];
+    for(int i = 0;i<n;i++)
+    {
+        cin>>arr[i];
+    }
+    int key;
+    cin>>key;
+    cout<<solve(arr,n,0,key);
+}
