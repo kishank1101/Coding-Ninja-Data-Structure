@@ -1,0 +1,40 @@
+
+// Given an integer n, count and return the number of zeros
+// that are present in the given integer using recursion.
+// Input Format :
+// Integer n
+// Output Format :
+// No. of 0s
+// Sample Input :
+// 10204
+// Sample Output
+// 2
+
+#include <bits/stdc++.h>
+
+using namespace std;
+#define ll long long
+#define pb push_back
+map <ll,ll> hm;
+ll mod = 1e9+7;
+
+int solve(int n)
+{
+    if(n==0)
+    {
+        return 0;
+    }
+    if(n%10==0)
+    {
+        return 1+solve(n/10);
+    }
+    else return solve(n/10);
+}
+
+int main() {
+ios_base::sync_with_stdio(false);
+cin.tie(NULL);
+    int n;
+    cin>>n;
+    cout<<solve(n);
+}
