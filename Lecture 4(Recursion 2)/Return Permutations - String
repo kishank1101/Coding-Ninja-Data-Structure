@@ -1,0 +1,57 @@
+// Return Permutations - String
+// Send Feedback
+// Given a string S, find and return all the possible permutations of the input string.
+// Note 1 : The order of permutations is not important.
+// Note 2 : If original string contains duplicate characters, permutations will also be duplicates.
+// Input Format :
+// String S
+// Output Format :
+// All permutations (in different lines)
+// Sample Input :
+// abc
+// Sample Output :
+// abc
+// acb
+// bac
+// bca
+// cab
+// cba
+
+#include <bits/stdc++.h>
+
+using namespace std;
+#define ll long long
+#define pb push_back
+map <int,int> hm;
+ll mod = 1e9+7;
+
+void solve(string str,int l,int r,vector<string>& res)
+{
+    if(l==r)
+    {
+        res.pb(str);
+        return;
+    }
+    else
+    {
+        for(int i = l;i<=r;i++)
+        {
+            swap(str[i],str[l]);
+            solve(str,l+1,r,res);
+            swap(str[i],str[l]);
+        }
+    }
+}
+
+int main() {
+ios_base::sync_with_stdio(false);
+cin.tie(NULL);
+    string str;
+    cin>>str;
+    vector<string> res;
+    solve(str,0,str.length()-1,res);
+    for(int i = 0;i<res.size();i++)
+    {
+        cout<<res[i]<<endl;
+    }
+}
