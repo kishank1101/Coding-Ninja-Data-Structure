@@ -1,0 +1,74 @@
+// Check AB
+// Send Feedback
+// Suppose you have a string made up of only 'a' and 'b'. Write a recursive 
+// function that checks if the string was generated using the following rules:
+// a. The string begins with an 'a'
+// b. Each 'a' is followed by nothing or an 'a' or "bb"
+// c. Each "bb" is followed by nothing or an 'a'
+// If all the rules are followed by the given string, return true otherwise return false.
+// Sample Input:
+// abb
+// Sample Output:
+// true
+
+#include <bits/stdc++.h>
+
+using namespace std;
+#define ll long long
+#define pb push_back
+map <ll,ll> hm;
+ll mod = 1e9+7;
+
+bool solve(string str)
+{
+    int n = str.size();
+    if(n==0)
+    {
+        return true;
+    }
+    if(str.size()==1)
+    {
+        if(str[0]=='a')
+        {
+            str.erase(0,1);
+            return solve(str);
+        }
+        else return false;
+    }
+    else if(str.size()==2)
+    {
+        if(str[0]=='a' && str[1]=='a')
+        {
+            str.erase(0,2);
+            return solve(str);
+        }
+        else return false;
+    }
+    else 
+    {
+        if(str[0]=='a' && str[1]=='a')
+        {
+            str.erase(0,2);
+            return solve(str);
+        }
+        else if(str[0]=='a' && str[1]=='b' && str[2]=='b')
+        {
+            str.erase(0,3);
+            return solve(str);
+        }
+        else return false;
+    }
+    
+}
+
+int main() {
+ios_base::sync_with_stdio(false);
+cin.tie(NULL);
+    string str;
+    cin>>str;
+    if(solve(str))
+    {
+        cout<<"True";
+    }
+    else cout<<"False"<<endl;
+}
