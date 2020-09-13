@@ -1,0 +1,76 @@
+ 
+// Eliminate duplicates from LL
+// Send Feedback
+// Given a sorted linked list (elements are sorted in ascending order). 
+//     Eliminate duplicates from the given LL, such that output LL contains only unique elements.
+// You don't need to print the elements, just remove duplicates and return the head of updated LL.
+// Input format : Linked list elements (separated by space and terminated by -1)
+
+// Sample Input 1 :
+// 1 2 3 3 3 4 4 5 5 5 7 -1
+// Sample Output 1 :
+// 1 2 3 4 5 7
+
+#include <bits/stdc++.h>
+
+using namespace std;
+#define ll long long
+#define pb push_back
+map <ll,ll> hm;
+ll mod = 1e9+7;
+
+struct node{
+    int data;
+    node* next;
+    node(int x){
+        data = x;
+        next = NULL;
+    }
+};
+
+node* solve(node* head)
+{
+    node* temp = head;
+    while(temp->next!=NULL)
+    {
+        if(temp->data == temp->next->data)
+        {
+            temp->next = temp->next->next;
+        }
+        else temp = temp->next;
+    }
+    return head;
+}
+
+int main() {
+ios_base::sync_with_stdio(false);
+cin.tie(NULL);
+    node* head = NULL;
+    node* temp = head;
+    while(1)
+    {
+        int x;
+        cin>>x;
+        if(x==-1)
+        {
+            break;
+        }
+        if(head==NULL)
+        {
+            head = new node(x);
+            temp = head;
+        }
+        else
+        {
+            temp->next = new node(x);
+            temp = temp->next;
+        }
+    }
+    head = solve(head);
+    temp = head;
+    while(temp)
+    {
+        cout<<temp->data<<" ";
+        temp = temp->next;
+    }
+}
