@@ -1,0 +1,68 @@
+
+// All possible ways
+// Send Feedback
+// Given two integers a and b. You need to find and return the count of possible ways in which we can represent the number a as the sum of unique integers raise to the power b.
+// For eg. if a = 10 and b = 2, only way to represent 10 as -
+// 10 = 1^2 + 3^2 
+// Hence, answer is 1.
+// Note : x^y represents x raise to the power y
+// Inout Format :
+// Two integers a and b (separated by space)
+// Output Format :
+// Count
+// Constraints :
+// 1 <= a <= 10^5
+// 1 <= b <= 50
+// Sample Input 1 :
+// 10 2
+// Sample Output 1 :
+// 1
+// Sample Input 2 :
+// 100 2
+// Sample Output 2 :
+// 3
+#include <bits/stdc++.h>
+
+using namespace std;
+#define ll long long
+#define pb push_back
+map <ll,ll> hm;
+ll mod = 1e9+7;
+
+int rec(vector<vector<int>> matrix,int n,int m,int i,int j)
+{
+    if(i==m-1 && j==n-1)
+    {
+        return matrix[i][j];
+    }
+    else if(i>=m || j>=n)
+    {
+        return INT_MAX;
+    }
+    else
+    {
+        int x = rec(matrix,n,m,i+1,j);
+        int y = rec(matrix,n,m,i+1,j+1);
+        int z = rec(matrix,n,m,i,j+1);
+        return min(x,min(y,z))+matrix[i][j];
+    }
+}
+
+int main() {
+ios_base::sync_with_stdio(false);
+cin.tie(NULL);
+    int m,n;
+    cin>>m>>n;
+    vector <vector<int>> matrix(m);
+    for(int i = 0;i<m;i++)
+    {
+        for(int j = 0;j<n;j++)
+        {
+            int x;
+            cin>>x;
+            matrix[i].pb(x);
+        }
+    }
+    cout<<rec(matrix,n,m,0,0);
+    
+}
