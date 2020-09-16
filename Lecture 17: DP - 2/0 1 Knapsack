@@ -1,0 +1,90 @@
+
+// Code: 0 1 Knapsack
+// Send Feedback
+// A thief robbing a store and can carry a maximal weight of W into his knapsack. There are N items and ith item weigh wi and is value vi. What is the maximum value V, that thief can take ?
+// Input Format :
+// Line 1 : N i.e. number of items
+// Line 2 : N Integers i.e. weights of items separated by space
+// Line 3 : N Integers i.e. values of items separated by space
+// Line 4 : Integer W i.e. maximum weight thief can carry
+// Output Format :
+// Line 1 : Maximum value V
+// Constraints
+// 1 <= N <= 20
+// 1<= wi <= 100
+// 1 <= vi <= 100
+// Sample Input 1 :
+// 4
+// 1 2 4 5
+// 5 4 8 6
+// 5
+// Sample Output :
+// 13
+#include <bits/stdc++.h>
+
+using namespace std;
+#define ll long long
+#define pb push_back
+map <ll,ll> hm;
+ll mod = 1e9+7;
+
+int dp[1000][1000];
+int knapsack(int* weight,int* value, int n, int w)
+{
+    if(n==0 || w<=0)
+    {
+        return 0;
+    }
+    if(dp[n][w]!=-1)
+    {
+        return dp[n][w];
+    }
+    if(w>=weight[n-1])
+    {
+        return dp[n][w]=max(value[n-1]+ knapsack(weight,value,n-1,w-weight[n-1]),knapsack(weight,value,n-1,w));
+    }
+    else
+    {
+        return dp[n][w]=knapsack(weight,value,n-1,w);
+    }
+}
+
+
+int main() {
+ios_base::sync_with_stdio(false);
+cin.tie(NULL);
+    int n;
+    cin>>n;
+    memset(dp,-1,sizeof(dp));
+    int weight[n],value[n];
+    for(int i = 0;i<n;i++)
+    {
+        cin>>weight[i];
+    }
+    for(int i = 0;i<n;i++)
+    {
+        cin>>value[i];
+    }
+    int w;
+    cin>>w;
+    cout<<knapsack(weight,value,n,w)<<endl;
+    cout<<dp[n][w]<<endl;
+    int dp1[n+1][w+1];
+    for(int i = 0;i<=n;i++)
+    {
+        for(int j = 0;j<=w;j++)
+        {
+            
+            if(i==0 || j==0)
+            {
+                dp1[i][j]=0;
+            }
+            else if(weight[i-1]<=j)
+            {
+                dp1[i][j]=max(value[i-1]+dp1[i-1][j-weight[i-1]],dp1[i-1][j]);
+            }
+            else dp1[i][j]=dp1[i-1][j];
+        }
+    }
+    cout<<dp1[n][w]<<endl;
+}
