@@ -1,0 +1,59 @@
+
+// Maximum Square Matrix With All Zeros
+// Send Feedback
+// Given a n*m matrix which contains only 0s and 1s, find out the size of maximum square sub-matrix with all 1s. You need to return the size of square with all 0s.
+// Input format :
+// Line 1 : n and m (space separated positive integers)
+// Next n lines : m elements of each row (separated by space).
+// Output Format:
+// Line 1 : Size of maximum square sub-matrix
+// Sample Input :
+// 3 3
+// 1 1 0
+// 1 1 1
+// 1 1 1
+// Sample Output :
+// 1
+
+#include <bits/stdc++.h>
+
+using namespace std;
+#define ll long long
+#define pb push_back
+map <ll,ll> hm;
+ll mod = 1e9+7;
+
+
+int main() {
+ios_base::sync_with_stdio(false);
+cin.tie(NULL);
+    int n,m;
+    cin>>n>>m;
+    int arr[n][m];
+    for(int i = 0;i<n;i++)
+    {
+        for(int j = 0;j<m;j++)
+        {
+            cin>>arr[i][j];
+        }
+    }
+    int dp[n][m];
+    int ans = -1;
+    for(int i = 0;i<n;i++)
+    {
+        for(int j =0;j<m;j++)
+        {
+            if(i==0 || j==0)
+            {
+                dp[i][j]=arr[i][j];
+            }
+            else if(arr[i][j]==1)
+            {
+                dp[i][j]=min(dp[i-1][j],min(dp[i][j-1],dp[i-1][j-1]))+1;
+                ans = max(ans,dp[i][j]);
+            }
+            else dp[i][j]=0;
+        }
+    }
+    cout<<ans<<endl;
+}
